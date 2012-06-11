@@ -12,7 +12,7 @@ instance (Eq v, Ord p) => Ord (Tree v p) where
     _ `compare` Empty = GT
     (Node (_, pr1) _ _) `compare` (Node (_, pr2) _ _) = pr1 `compare` pr2
 
-{- insert probability -}
+{- insert probabilities and continue -}
 huffman :: [(Char, Int)] -> [(Char, String)]
 huffman ps = huffman' rs
     where
@@ -20,13 +20,13 @@ huffman ps = huffman' rs
 	    let ff (rs, acc, w) (c, p) = ((c, p % w):rs, acc + p, w)
 	    in foldl ff ([], 0, acc) ps
 
-{- get Huffman codes -}
+{- convert to a tree, insert codes, convert back -}
 huffman' :: [(Char, Ratio Int)] -> [(Char, String)]
 huffman' srs = flatten $ toCodeTree ht ""
     where
         ht = toProbTree $ sort [Node k Empty Empty | k <- srs]
 
-{- convert a list of leaves to a tree -}
+{- build the probability tree from a list of (symbol, probability) -}
 toProbTree :: [Tree Char (Ratio Int)] -> Tree Char (Ratio Int)
 toProbTree [t] = t
 toProbTree (t1:t2:ts) =
@@ -35,7 +35,7 @@ toProbTree (t1:t2:ts) =
         t = Node ('x', p1 + p2) t1 t2
     in toProbTree $ sort (t:ts)
 
-{- insert codes -}
+{- convert a probability tree to the code tree -}
 toCodeTree :: Tree Char (Ratio Int) -> String -> Tree Char String
 toCodeTree Empty _ = Empty
 toCodeTree (Node (v, _) t1 t2) c =

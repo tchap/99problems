@@ -6,4 +6,4 @@
 import qualified Data.List as L
 
 encode :: (Eq a) => [a] -> [(Int, a)]
-encode xs = map (\grp@(x:xs) -> (length grp, x)) $ L.group xs
+encode = map (\grp@(x:xs) -> (length grp, x)) . L.group

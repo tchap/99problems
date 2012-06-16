@@ -8,17 +8,17 @@ cbal_tree(N, Tree) :-
 	R is (N - 1) mod 2,
 	cbal_tree(Q, R, Tree).
 
-cbal_tree(Q, 0, t(L, 'x', R)) :-
+cbal_tree(Q, 0, t('x', L, R)) :-
 	cbal_tree(Q, L),
 	cbal_tree(Q, R).
 
-cbal_tree(Q, 1, t(L, 'x', R)) :-
+cbal_tree(Q, 1, t('x', L, R)) :-
 	NL is Q,
 	NR is Q + 1,
 	cbal_tree(NL, L),
 	cbal_tree(NR, R).
 
-cbal_tree(Q, 1, t(L, 'x', R)) :-
+cbal_tree(Q, 1, t('x', L, R)) :-
 	NL is Q + 1,
 	NR is Q,
 	cbal_tree(NL, L),

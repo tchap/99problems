@@ -3,6 +3,7 @@
 import qualified Data.List as L
 
 phi :: Int -> Int
+phi 1 = 1
 phi n = foldl1 (*) $ map mf $ primeFactorsMult n
     where mf (p, ex) = truncate $ 
             (fromIntegral $ p-1) * (fromIntegral p) ** (fromIntegral $ ex-1)

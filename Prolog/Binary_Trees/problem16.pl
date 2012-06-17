@@ -1,5 +1,8 @@
 %% 4.16 (**) A string representation of binary trees
 
+%% Doing just the a) part, the other part does not really make sense
+%% for how I implemented it.
+
 % tree_atom(?Tree, ?Atom) - at least one must be instantiated
 tree_atom(Tree, Atom) :-
 	nonvar(Tree),

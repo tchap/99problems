@@ -34,7 +34,7 @@ tree_to_atom(t(V, L, R), Atom) :-
 
 atom_to_tree(Atom, Tree) :-
 	atom_chars(Atom, List),
-	next_tree(List, Tree, _).
+	next_tree(List, Tree, []).
 
 % not so pretty and full of red cuts
 next_tree([V, '(', L, ',', R, ')'|Rest],
